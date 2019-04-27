@@ -7,23 +7,33 @@ export default function Deals(props) {
 
     const [popFlight, setPopFlight] = useState([]);
     const [{ data, loading, error }, refetch] = useAxios(
-      'https://everymundointernship.herokuapp.com/popularRoutes/BM88RE94IE35'
+      'https://everymundointernship.herokuapp.com/popularRoutes/BM88RE94IE35' //this takes a little time 
     )
 
+    console.log('data is ',data)
+
+    const flightData  = data || [];
+
+
     // function showFlight(){
-    //   data.map((eachFlight,i)=>{
+    //   console.log(flightData)
+    //   let newArray = flightData.map((eachFlight,i)=>{
     //     console.log(eachFlight.departureDate)
+    //     return eachFlight.departureDate
     // })
+    // return newArray 
     // }
+
+    const showFlight = () => flightData.map(eachFlight => eachFlight.departureDate) 
+
+
+
     return(
       <div>
-         <button onClick={refetch}>refetch</button>
+         <button onClick={showFlight()}>refetch</button>
       {loading && <p>Loading...</p>}
       {error && <p>Error!</p>}
-      {data && <pre>{(data.map((eacgFlight,i)=>{
-        console.log(eacgFlight.departureDate)
-      }))}</pre>}
-     {/* {showFlight()} */}
+     {showFlight()} {/*But i'm not waiting*/}
       </div>
     )
 }
